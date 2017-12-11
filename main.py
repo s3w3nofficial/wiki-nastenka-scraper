@@ -4,6 +4,7 @@ import requests
 from lxml import html
 import threading, time
 
+caching_time = 3600
 is_caching = False
 
 studenti_users_tree = None
@@ -16,7 +17,7 @@ knihovny_users_tree = None
 knihovny_articles_tree = None
 knihovny_programs_tree = None
 
-class ReCache(threading.Thread):
+class ReCache(threading.Thread ):
 
     
     def __init__(self):
@@ -24,6 +25,7 @@ class ReCache(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
+        global caching_time
         global is_caching
         global studenti_users_tree
         global studenti_articles_tree
@@ -57,7 +59,7 @@ class ReCache(threading.Thread):
             knihovny_programs_tree = html.fromstring(knihovny_programs_body.content)
             is_caching = False
             print('done caching')
-            time.sleep(30)
+            time.sleep(caching_time)
 
 base = "https://outreachdashboard.wmflabs.org/campaigns/";
 
