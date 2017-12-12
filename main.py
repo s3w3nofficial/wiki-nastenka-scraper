@@ -19,7 +19,7 @@ knihovny_programs_tree = None
 
 class ReCache(threading.Thread ):
 
-    
+
     def __init__(self):
         global thread
         threading.Thread.__init__(self)
@@ -74,7 +74,7 @@ def api_studenti_users():
     while is_caching:
         time.sleep(1)
 
-    tree = studenti_users_body
+    tree = studenti_users_tree
     if len(request.args) == 0:
         users = tree.xpath('//*[@id="users"]/table/tbody/tr/td/a/text()')
         edit = tree.xpath('//*[@id="users"]/table/tbody/tr/td[2]/text()')
@@ -82,7 +82,7 @@ def api_studenti_users():
             edit[e] = edit[e].replace('\n', '')
         program = tree.xpath('//*[@id="users"]/table/tbody/tr/td[3]/small/a/text()')
         return jsonify({'users': users, 'edit_count': edit, 'program' : program})
-   
+
     payload = {}
 
     if request.args.get("users") == "1":
@@ -114,7 +114,7 @@ def api_studenti_articles():
         for v in range(len(views)):
             views[v] = views[v].replace('\n', '')
         return jsonify({'title' : title, 'chars_added' : chars_added, 'views' : views})
-    
+
     payload = {}
 
     if request.args.get("title") == "1":
@@ -204,7 +204,7 @@ def api_seniori_users():
             edit[e] = edit[e].replace('\n', '')
         program = tree.xpath('//*[@id="users"]/table/tbody/tr/td[3]/small/a/text()')
         return jsonify({'users': users, 'edit_count': edit, 'program' : program})
-   
+
     payload = {}
 
     if request.args.get("users") == "1":
@@ -236,7 +236,7 @@ def api_seniori_articles():
         for v in range(len(views)):
             views[v] = views[v].replace('\n', '')
         return jsonify({'title' : title, 'chars_added' : chars_added, 'views' : views})
-    
+
     payload = {}
 
     if request.args.get("title") == "1":
@@ -326,7 +326,7 @@ def api_knihovny_users():
             edit[e] = edit[e].replace('\n', '')
         program = tree.xpath('//*[@id="users"]/table/tbody/tr/td[3]/small/a/text()')
         return jsonify({'users': users, 'edit_count': edit, 'program' : program})
-   
+
     payload = {}
 
     if request.args.get("users") == "1":
@@ -358,7 +358,7 @@ def api_knihovny_articles():
         for v in range(len(views)):
             views[v] = views[v].replace('\n', '')
         return jsonify({'title' : title, 'chars_added' : chars_added, 'views' : views})
-    
+
     payload = {}
 
     if request.args.get("title") == "1":
